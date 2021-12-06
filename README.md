@@ -1,6 +1,6 @@
 # ACM-Simulation-Games
 
-> Developers: [Sudarshan Sundarrajan](https://github.com/sudarshan411) | [Mihir Ketkar]() || [Hari Kurapati]() | [Priyanka Gawande]() | [Sudhanva Nadiger]() <br/>
+> Developers: [Sudarshan Sundarrajan](https://github.com/sudarshan411) | [Mihir Ketkar]() || [Hari Kurapati](https://github.com/Hari-Kurapati) | [Priyanka Gawande](https://github.com/priiyanka82) | [Sudhanva Nadiger](https://github.com/Sudhanva-Nadiger) <br/>
 > Date: 6 December 2021
 
 
