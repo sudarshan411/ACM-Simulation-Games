@@ -9,7 +9,7 @@ for i in range (0,101):
 	i=i+1
 
 #define a 101x101 transition matrix using for loop
-
+#it's not necessary to roll a dice such the player should land exactly on 100 to win 
 T=np.zeros((101,101),dtype=float)
 row=0
 col=0
@@ -24,7 +24,23 @@ for row in range(0,101):
 			if ((col != (100 ) and (col>(row)))):
 				T[row][col]=(1.0/6)
 			elif (col==100):
-				T[row][col]=((6-(100-col))*(1.0/6))
+				T[row][col]=((6-(99-row))*(1/6))
 			col+=1
 	row+=1
 print (T)
+s=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]
+#random walk
+#print (" ")
+start_state=0
+steps=0
+print (state[start_state],"---->", end= " ")
+prev_state=start_state
+curr_state=prev_state
+while (curr_state<101):
+	curr_state=np.random.choice(s,p=T[prev_state])
+	print (state[curr_state],"---->", end= " ")
+	prev_state=curr_state
+	steps+=1
+print (100,"---->", end= " ")
+print ("Stop")
+print (steps)
