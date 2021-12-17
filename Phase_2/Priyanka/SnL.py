@@ -2,18 +2,14 @@ import numpy as np
 import random
 import pandas as pd
 
-#define a dictionary of 101 states ranging from 0 to 100 representing every possible square using for loop
-state={ }
-i=0
-for i in range (0,100):
-	state[i]=str(i)
-	i=i+1
-state[100]="Win..!!"
+#defining an initial matrix
+init_matrix=np.zeros((1, 101))
+init_matrix[0][0]=1
 
-#define a 101x101 transition matrix using for loop
-#it's not necessary to roll a dice such the player should land exactly on 100 to win 
+#defining a 101 x 101 transition matrix using for loop
+#it's not necessary to roll the dice such that the the token lands exactly on 100 to win
 
-#basic board without Snakes and Ladder
+#basic board without Snakes and Ladders
 T=np.zeros((101,101),dtype=float)
 row=0
 col=0
@@ -34,10 +30,10 @@ for row in range(0,101):
 		T[100][100]=1
 	row+=1
 
-print (T[0,:])
+
 #snakes and ladder included in following form
 #    Ladders        Snakes
-#  from    to    from    to 
+#  from    to     from    to 
 #   3      19      11     7
 #   15     37      18     13
 #   22     42      28     12
@@ -48,6 +44,7 @@ print (T[0,:])
 #   76     91      92     75
 #   84     98      99     70
 
+#defining ladder and snakes as dictionaries
 ladder={
         3:19,
         15:37,
@@ -70,6 +67,8 @@ snakes= {
         92:75,
         99:70
         }
+
+#Changing T matrix with respect to Snakes and Ladder
 for i in range (0,101):
         for j in ladder.keys():
                 if (T[i][j]!=0):
@@ -84,22 +83,21 @@ for i in range (0,101):
                          T[i][j]=0
          i=i+1
 
-print (T[0,:])
-df = pd.DataFrame(T)
-print (df)
-#board with SnL
-s=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]
-start_state=0
-steps=0
-print (state[start_state],"---->", end= " ")
-prev_state=start_state
-curr_state=prev_state
-while (curr_state!=100):
-	curr_state=np.random.choice(s,p=T[prev_state])
-	if (curr_state<100):
-		print (state[curr_state],"---->", end= " ")
-	else:
-		print (state[curr_state])
-	prev_state=curr_state
-	steps+=1
-print ("\n\n",steps)
+#Calculating Probability distribution
+
+#Calculating n-step transition matrix
+
+n=int (input("Enter no. of steps : "))
+T_n=T
+
+i=0
+while i<n:
+    T_n=np.matmul(T_n,T)
+    i+=1
+#A_n is the n step transition matrix
+
+#to find the probability of finishing the game in n steps
+
+P=np.matmul(init_matrix,T_n)
+
+print ("The Probability of finishing game in ", n, "steps is : \n",P[0][100])
